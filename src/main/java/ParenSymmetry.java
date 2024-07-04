@@ -24,18 +24,34 @@ public class ParenSymmetry {
 
     public void checkFile(String filename) {
         // open file named filename
+        try {
+            Scanner fileIn = new Scanner(new File("TestStrings0.txt"));
 
-            // for each line in the file
-            // read the line
-            // print whether or not the line's parenthesis are balanced
-
-        // CLOSE the file
+            while (fileIn.hasNextLine()) {
+                //Read one line
+                String line = fileIn.nextLine();
+                //Check if the line is balanced using isBalance() method
+                boolean balanced = isBalanced(line);
+                //Print if that string is balanced or not, returns either true or false
+                System.out.println(line + " -> " + balanced);
+            }
+        }
+        catch (IOException e){
+            System.out.println("File not found");
+        }
     }
 
     public static void main(String[] args) {
+
         ParenSymmetry ps = new ParenSymmetry();
 
+        // Calls file
+        ps.checkFile("TestStrings0.txt");
+
+        // Calls method isBalanced and returns a boolean
         Boolean b0 = ps.isBalanced("()");
+
+        // Calls method printResult
         printResult(b0, true);
 
         String[] falseStrings = {"(", "((", ")", "", "(()())((())))"};
